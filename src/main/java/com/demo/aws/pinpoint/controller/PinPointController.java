@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,7 @@ import software.amazon.awssdk.services.pinpoint.model.WriteSegmentRequest;
 @RequestMapping("/api")
 @Api(value = "API to connect with AWS pinpoint",
 description = "This API provides the capability to connect with Pinpoint for push notification", produces = "application/json")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PinPointController {
 	
 	@Value("${aws.pinpoint.projectId}")
@@ -57,6 +59,7 @@ public class PinPointController {
 		PinpointClient pinpoint = PinpointClient.builder()
 	            .region(Region.AP_SOUTH_1)
 	            .build();
+	//	System.out.print(pinpoint);
 				
 		 String endpointId = UUID.randomUUID().toString();
 	        System.out.println("Endpoint ID: " + endpointId);
